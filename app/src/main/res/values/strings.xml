@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Measure APP</string>
+    <string name="app_measure">Measure</string>
+    <string name="SBP">SBP</string>
+    <string name="mmHg">mmHg</string>
+    <string name="DBP">DBP</string>
+    <string name="HR">HR</string>
+    <string name="bpm">bpm</string>
+</resources>

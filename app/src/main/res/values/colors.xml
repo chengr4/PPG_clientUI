@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="colorButtonEnable">#FF40882A</color>
+    <color name="colorButtonTextEnable">#FF000000</color>
+    <color name="colorButtonTextDisable">#FFAAAAAA</color>
+
+    <color name="colorTextTitle">#FF0000FF</color>
+    <color name="colorText">#FF000000</color>3a6bcb
+    <color name="colorSBP">#FF3A6BCB</color>
+    <color name="colorDBP">#FFD55000</color>
+    <color name="colorHR">#FF40882A</color>
+
+    <color name="colorStartButtonStart">#FF65BE4E</color>
+    <color name="colorStartButtonEnd">#FF43AC22</color>
+    <color name="colorStartButtonShadow">#80000000</color>
+</resources>
