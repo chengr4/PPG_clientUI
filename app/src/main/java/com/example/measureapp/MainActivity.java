@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -14,6 +15,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -48,11 +50,28 @@ public class MainActivity extends AppCompatActivity {
         // key-value to post (body part)
         HashMap jsonBody = new HashMap();
         jsonBody.put("name", getPatientName);
+        jsonBody.put("sbp_raw", 666);
+        jsonBody.put("dbp_raw", 666);
+        jsonBody.put("hr_raw", 666);
 
+        // post object (post PPG raw data and patient's name)
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(jsonBody), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                // define textView dbp, sbp, hr
+                TextView dbpValue = (TextView) findViewById(R.id.textView_dbp_value);
+                TextView sbpValue = (TextView) findViewById(R.id.textView_sbp_value);
+                TextView hrValue = (TextView) findViewById(R.id.textView_hr_value);
 
+                try {
+                    // show calculated data from server (dbp, sbp, ht)
+                    dbpValue.setText(response.getString("dbp"));
+                    Log.d("test",response.getString("dbp"));
+                    sbpValue.setText(response.getString("sbp"));
+                    hrValue.setText(response.getString("hr"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -62,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("VOLLEY", error.toString());
             }
         });
+        // must add in queue
         mQueue.add(postRequest);
     }
 }
