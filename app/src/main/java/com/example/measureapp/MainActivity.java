@@ -20,6 +20,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
 
     // patients array (for patch method)
     private ArrayList<String> patientsArray = new ArrayList<String>();
+
+    Random rand = new Random();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,15 +56,20 @@ public class MainActivity extends AppCompatActivity {
         // url to post and get
         String url = "https://drf-firsttry.herokuapp.com/patients/";
 
+        // random raw data (temporary, should be insteaded from PPG)
+        int sbp_raw = 0 - (rand.nextInt(3500) + 17000);
+        int dbp_raw = 0 - (rand.nextInt(3500) + 17000);
+        int hr_raw = 0 - (rand.nextInt(3500) + 17000);
+
         // key-value to post (body part)
         HashMap jsonBody = new HashMap();
         jsonBody.put("name", patientName);
-        jsonBody.put("sbp_raw", 888);
-        jsonBody.put("dbp_raw", 666);
-        jsonBody.put("hr_raw", 666);
+        jsonBody.put("sbp_raw", sbp_raw);
+        jsonBody.put("dbp_raw", dbp_raw);
+        jsonBody.put("hr_raw",  hr_raw);
 
-        // if the patient exists just update the data (not finished)
-        for(String eachPatient: this.patientsArray){
+        // if the patient exists just update the data (not finished, use for example method patch)
+        /*for(String eachPatient: this.patientsArray){
             if(patientName.equals(eachPatient)) {
                 Log.d("index", ""+this.patientsArray.indexOf(eachPatient)+1);
                 JsonObjectRequest patchRequest = new JsonObjectRequest(Request.Method.PATCH, url + (this.patientsArray.indexOf(eachPatient)+1), new JSONObject(jsonBody), new Response.Listener<JSONObject>() {
@@ -91,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 mQueue.add(patchRequest);
                 return;
             }
-        }
+        }*/
 
 
 
@@ -122,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         // must add in queue
-        this.patientsArray.add(patientName);
+        //this.patientsArray.add(patientName);
         mQueue.add(postRequest);
 
     }
